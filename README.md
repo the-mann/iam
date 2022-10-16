@@ -1,4 +1,6 @@
 # I AM. (Girls Hoo Hack 2022 Submission)
+## Video Demo
+https://www.youtube.com/watch?v=GzZlqD4cn9c
 ## Inspiration
 Test anxiety and imposter syndrome are rampant among female STEM students, leading to lower performance on assessments; studies by the University of Colorado Boulder, show that grade gaps form between women and their peers (Kost, et al., 2009). Test anxiety and imposter syndrome threaten student identities and their sense of belonging. Self-affirmations are positive statements, such as “I will be successful”. Statements like this improve sense of belonging and help to alleviate test anxiety. Studies have shown that positive self-affirmations help to alleviate this stress, and lead to better test scores overall (Sherman, 2013). This project aims to provide female students with affirmations before tests, to increase feelings of belonging and reduce test anxiety.
 
