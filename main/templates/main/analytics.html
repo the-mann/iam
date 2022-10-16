@@ -1,0 +1,75 @@
+{% extends "main/base.html" %}
+{% load bootstrap5 %}
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url "index" %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url "teacher_index" %}">Class List</a></li>
+        <li class="breadcrumb-item active">Analytics</li>
+    </ol>
+{% endblock %}
+
+{% block title %}
+    Class Analytics for {{ assignment.klass.name }} - {{ assignment.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="card col-8">
+            <div class="card-title px-2">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <div class="card-body px-2">
+                <p>{{ affirmation }}</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const config = {
+            type: 'bar',
+            data: {
+                labels: ["Confidence", "Grades Expected", "Preparation", "\"I did my best\""],
+                datasets: [
+                    {
+                        label: 'Before Test',
+                        data: [1, 3.9, 2.1, 1.3],
+                        borderColor: "rgb(255, 99, 132)",
+                        backgroundColor: "rgba(255,99,132,0.64)",
+                    },
+                    {
+                        label: 'After Test',
+                        data: [1.1, 3.6, 2.7, 1.8],
+                        borderColor: "rgb(99,219,255)",
+                        backgroundColor: "rgba(99,219,255, 0.64)",
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                // Elements options apply to all of the options unless overridden in a dataset
+                // In this case, we are setting the border of each horizontal bar to be 2px wide
+                elements: {
+                    bar: {
+                        borderWidth: 2,
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Survey Averages'
+                    }
+                }
+            },
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+{% endblock %}

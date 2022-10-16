@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% load bootstrap5 %}
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Teacher / My Classes</li>
+    </ol>
+{% endblock %}
+{% block title %}My Classes{% endblock %}
+
+{% block content %}
+    <h1></h1>
+    <div class="d-flex justify-content-end pb-4">
+        <a class="col-2 btn btn-success" href="{% url 'class_create' %}">Add New Class...</a>
+    </div>
+    {% for class in classes %}
+        <div class="d-flex px-2 justify-content-center">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ class.name }} at {{ class.meeting_time }}</h5>
+                        <p>
+                        <h6 class="h6">Assignments:</h6>
+                        <ul>
+                            {% for assignment in class.assignments.all %}
+                                <li>{{ assignment.name }} -
+                                    {% if not assignment.pre_survey_sent %}
+                                        <a href="{% url 'send_pre_survey' assignment.id %}">Send Pre-Survey</a>
+                                    {% else %}
+                                        <strike>Pre-Survey Already Sent</strike>
+                                    {% endif %}
+                                -
+                                    {% if not assignment.post_survey_sent %}
+                                        <a href="{% url 'send_post_survey' assignment.id %}">Send Post-Survey</a>
+                                    {% else %}
+                                        <strike>Post-Survey Already Sent</strike>
+                                    {% endif %}
+
+                                    {% if assignment.pre_survey_sent and assignment.post_survey_sent %}
+                                        <a href="{% url 'analytics' assignment.id %}">Analytics</a>
+                                    {% endif %}
+                            {% endfor %}
+                            <li>
+                                <a href="{% url "create_assignment" class.id %}">New Assignment</a>
+                            </li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
